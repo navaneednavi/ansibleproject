@@ -1,0 +1,16 @@
+- name: httpd
+  hosts: all
+  become: true
+  tasks: 
+    - name: install httpd
+      yum: 
+        name: httpd
+        state: present
+     - name: start httpd
+       service:
+       name: httpd
+       state: started
+     - name: copy file from playbook to remote
+       copy:
+         src: /var/lib/jenkins/workspace/ansibleproject/index.html
+         dest: /var/www/html
